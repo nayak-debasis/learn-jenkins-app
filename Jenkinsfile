@@ -3,12 +3,10 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
+             agent any
+                 environment {
+                    DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
+                        }
             steps {
                 sh '''
                     ls -la
