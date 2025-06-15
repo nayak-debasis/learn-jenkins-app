@@ -18,12 +18,19 @@ pipeline {
                 '''
             }
         }
-        stage('Test'){
-            agent any
-                steps{
-                    sh 'echo "Test stage"'
-                    sh 'test -f build/index.html && echo " File exists."  '
-                    sh 'npm test'
+         stage('Test') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+
+            steps {
+                sh '''
+                    test -f build/index.html
+                    npm test
+                '''
                 }
             
         }
