@@ -22,6 +22,7 @@ pipeline {
             agent any
                  environment {
                     DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
+                     image 'node:18-alpine'
                         }
             }
 
