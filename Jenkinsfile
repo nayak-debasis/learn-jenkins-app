@@ -22,6 +22,7 @@ pipeline {
             agent any
                 steps{
                     sh 'echo "Test stage"'
+                    sh 'test -f build/index.html && echo " File exists."  '
                 }
             
         }
