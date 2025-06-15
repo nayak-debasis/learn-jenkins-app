@@ -19,11 +19,11 @@ pipeline {
             }
         }
         stage('Test'){
-            agent any{
+            agent any
                 steps{
                     sh 'echo "Test stage"'
                 }
-            }
+            
         }
     }
 }
