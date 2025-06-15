@@ -19,11 +19,15 @@ pipeline {
             }
         }
          stage('Test') {
-            agent any
-                 environment {
-                    DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
-                     image 'node:18-alpine'
-                        }
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    args '-v $HOME/.npm:/root/.npm'  // Optional: cache npm
+                }
+            }
+            environment {
+                DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
+            }
             }
 
             steps {
