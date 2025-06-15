@@ -3,10 +3,10 @@ pipeline {
 
     stages {
         stage('Build') {
-             agent any
-                 environment {
-                    DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
-                        }
+            agent any
+            environment {
+                DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
+            }
             steps {
                 sh '''
                     ls -la
@@ -18,7 +18,8 @@ pipeline {
                 '''
             }
         }
-         stage('Test') {
+
+        stage('Test') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -28,14 +29,13 @@ pipeline {
             environment {
                 DOCKER_HOST = 'unix:///home/debasis-nayak/.docker/desktop/docker.sock'
             }
-            }
-
             steps {
                 sh '''
                     test -f build/index.html
+                    npm install
                     npm test
                 '''
-                }
-            
+            }
         }
     }
+}
